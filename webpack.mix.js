@@ -12,15 +12,17 @@ const mix = require("laravel-mix");
  */
 
 mix.js("resources/js/app.js", "public/js")
-    .postCss("resources/css/app.css", "public/css/*.css")
+    .postCss("resources/css/app.css", "public/css")
     .browserSync({
         proxy: {
             target: "http://127.0.0.1:8000",
         },
         files: [
-            "resources/views/**/*.blade.php",
-            "public/css/*.css",
-            "public/js/*.js",
+            "resources/**/*",
+            "config/**/*",
+            "routes/**/*",
+            "app/**/*",
+            "public/**/*",
         ],
         open: false,
         reloadOnRestart: true,

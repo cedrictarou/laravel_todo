@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\TodoRequest;
 use App\Models\Todo;
 use Illuminate\Http\Request;
+
 
 class TodoController extends Controller
 {
@@ -22,10 +24,12 @@ class TodoController extends Controller
         return redirect('/');
     }
 
-    public function update($id, Request $request)
+    public function update(Request $request, $id)
     {
-        $content = $request->input('new_content');
-        Todo::find($id)->fill(['content' => $content])->save();
+        $content = $request->input('content');
+        // dd($content);
+        $todo = Todo::find($id);
+        $todo->fill(['content' => $content])->save();
         return redirect('/');
     }
 

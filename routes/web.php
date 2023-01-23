@@ -15,10 +15,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 // topページ
-Route::get('/', [TodoController::class, 'index']);
+Route::get('/', [TodoController::class, 'index'])->name('index');
 // add todo
-Route::post('/', [TodoController::class, 'store']);
+Route::post('/', [TodoController::class, 'store'])->name('store');
 // update todo
-Route::post('/update/{id}', [TodoController::class, 'update']);
+Route::post('/update/{id}', [TodoController::class, 'update'])->name('update');
 // delete todo
-Route::post('/delete/{id}', [TodoController::class, 'delete']);
+Route::post('/delete/{id}', [TodoController::class, 'delete'])->name('delete');
