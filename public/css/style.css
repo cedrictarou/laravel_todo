@@ -1,4 +1,4 @@
-/* *,
+*,
 *:before,
 *:after {
     box-sizing: border-box
@@ -8,27 +8,125 @@ html {
     font-size: 62.5%;
 }
 
-
 body {
-
     font-size: 1.6rem;
+    background-color: #2d197c;
+}
 
+
+/* 共通パーツ */
+.btn {
+    display: block;
+    background-color: transparent;
+    border: solid .1rem #2D197C;
+    border-radius: 1.5rem;
+    padding: .8rem 1.2rem;
+    font-size: 1.2rem;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.btn:hover {
+    opacity: 0.7;
+    transition: all .5s;
+}
+
+.input {
+    width: 100%;
+    padding: 3px 7px;
+    border-radius: 5px;
+    border: 0.1rem solid #ccc;
+}
+
+.input:focus {
+    outline: 0;
+    border: 0.1rem solid #2D197C;
 }
 
 .container {
-    background-color: #2d197c;
-    height: 100vh;
-    width: 100vw;
-    position: relative;
+    margin: 0 auto;
+    max-width: 800px;
+    min-width: 500px;
+    margin-top: 10rem;
+    padding: 0 2rem;
 }
 
+/* 個別パーツ */
 .todo__container {
     background-color: #fff;
-    max-width: 50%;
-    padding: 30px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
     border-radius: 10px;
-} */
+    padding: 2rem 5rem;
+}
+
+.todo-add__wrapper {
+    width: 100%;
+    margin-bottom: 2rem;
+}
+
+.title {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.todo-add__form {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.todo-add__field {
+    width: 90%;
+}
+
+.btn--add {
+    color: #dce7ed;
+    border: 0.1rem solid #dce7ed;
+    background-color: #2D197C;
+}
+
+/* todo-list */
+.todo-list__wapper {}
+
+.todo-list__form {
+    display: flex;
+    justify-content: center;
+}
+
+.todo-list__table {
+    width: 100%;
+}
+
+.todo-list__table thead {
+    text-align: center;
+    font-weight: 800;
+}
+
+.todo-list__table td {
+    padding: .7rem .5rem;
+    text-align: center;
+}
+
+.todo-list__date {
+    font-size: 1.4rem;
+}
+
+.todo-list__content .input {
+    width: 100%;
+}
+
+.todo-list__action .btn {
+    margin: 0 auto;
+}
+
+.btn--update {
+    color: #dce7ed;
+    background-color: #d2562b;
+    border: 0.1rem solid #d2562b;
+}
+
+.btn--delete {
+    color: #dce7ed;
+    background-color: #a1a9ca;
+    border: 0.1rem solid #a1a9ca;
+}

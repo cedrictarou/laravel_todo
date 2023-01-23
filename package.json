@@ -16,5 +16,9 @@
         "lodash": "^4.17.19",
         "postcss": "^8.4.21",
         "tailwindcss": "^3.2.4"
+    },
+    "dependencies": {
+        "browser-sync": "^2.27.11",
+        "browser-sync-webpack-plugin": "^2.3.0"
     }
 }
