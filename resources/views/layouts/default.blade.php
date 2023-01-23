@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 
-        <script src="{{ mix('js/app.js') }}" defer></script>
+        <script strc="{{ mix('js/app.js') }}" defer></script>
         <title>{{ config('app.name', 'Laravel') }}</title>
     </head>
 
