@@ -3,6 +3,9 @@
 @section('content')
     <div class="container">
         <div class="todo__container">
+            @error('content')
+                <div class="message--error">{{ $message }}</div>
+            @enderror
             <div class="todo-add__wrapper">
                 <h1 class="title">Todo List</h1>
                 <form action="{{ route('store') }}" method="POST" class="todo-add__form">
