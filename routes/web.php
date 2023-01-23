@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+// topページ
 Route::get('/', [TodoController::class, 'index']);
+// add todo
+Route::post('/', [TodoController::class, 'store']);
