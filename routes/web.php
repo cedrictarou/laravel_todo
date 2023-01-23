@@ -18,3 +18,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [TodoController::class, 'index']);
 // add todo
 Route::post('/', [TodoController::class, 'store']);
+// update todo
+Route::post('/update/{id}', [TodoController::class, 'update']);
+// delete todo
+Route::post('/delete/{id}', [TodoController::class, 'delete']);

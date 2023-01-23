@@ -12,7 +12,9 @@
                 </form>
             </div>
             <div class="todo-list__wapper">
-                <form action="/" method="POST" class="todo-list__form">
+
+                <form method="POST" class="todo-list__form">
+                    {{-- <input name="_method" type="hidden" value="PUT"> --}}
                     @csrf
                     <table class="todo-list__table">
                         <thead>
@@ -25,11 +27,15 @@
                             @foreach ($todos as $todo)
                                 <tr>
                                     <td class="todo-list__date">{{ $todo->updated_at }}</td>
-                                    <td class="todo-list__content"><input class="input" type="text"
+                                    <td class="todo-list__content"><input class="input" type="text" name="new_content"
                                             value="{{ $todo->content }}">
                                     </td>
-                                    <td class="todo-list__action"><button class="btn btn--update">更新</button></td>
-                                    <td class="todo-list__action"><button class="btn btn--delete">削除</button></td>
+                                    <td class="todo-list__action"><button class="btn btn--update"
+                                            data-action="/update/{{ $todo->id }}">更新</button></td>
+                                    <td class="todo-list__action"><button type="submit" class="btn btn--delete"
+                                            data-id={{ $todo->id }}
+                                            data-action="/delete/{{ $todo->id }}">削除</button>
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>

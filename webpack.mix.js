@@ -17,5 +17,11 @@ mix.js("resources/js/app.js", "public/js")
         proxy: {
             target: "http://127.0.0.1:8000",
         },
-        files: ["resources/views/**/*.blade.php", "public/css/*.css"],
+        files: [
+            "resources/views/**/*.blade.php",
+            "public/css/*.css",
+            "public/js/*.js",
+        ],
+        open: false,
+        reloadOnRestart: true,
     });

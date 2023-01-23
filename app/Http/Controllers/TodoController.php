@@ -21,4 +21,17 @@ class TodoController extends Controller
         $todo->fill(['content' => $content])->save();
         return redirect('/');
     }
+
+    public function update($id, Request $request)
+    {
+        $content = $request->input('new_content');
+        Todo::find($id)->fill(['content' => $content])->save();
+        return redirect('/');
+    }
+
+    public function delete($id)
+    {
+        Todo::find($id)->delete();
+        return redirect('/');
+    }
 }
