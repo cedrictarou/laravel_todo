@@ -13,8 +13,7 @@
             </div>
             <div class="todo-list__wapper">
 
-                <form method="POST" class="todo-list__form" action="/">
-                    @csrf
+                <div class="todo-list__form">
                     <table class="todo-list__table">
                         <thead>
                             <td>作成日</td>
@@ -27,19 +26,29 @@
                                 <tr>
                                     <td class="todo-list__date">{{ $todo->updated_at }}</td>
                                     <td class="todo-list__content">
-                                        <input class="input" type="text" name="content" value="{{ $todo->content }}">
+                                        <form action="/update/{{ $todo->id }}" method="POST"
+                                            id="form_{{ $todo->id }}">
+                                            @csrf
+                                            <input class="input" type="text" name="content"
+                                                value="{{ $todo->content }}">
+                                        </form>
                                     </td>
-                                    <td class="todo-list__action"><button class="btn btn--update" type="submit"
-                                            data-action="/update/{{ $todo->id }}">更新</button></td>
-                                    <td class="todo-list__action"><button type="submit" class="btn btn--delete"
-                                            data-action="/delete/{{ $todo->id }}">削除</button>
+                                    <td class="todo-list__action">
+                                        <button form="form_{{ $todo->id }}" type="submit" class="btn btn--update"
+                                            data-action="/update/{{ $todo->id }}">更新</button>
+                                    </td>
+                                    <td class="todo-list__action">
+                                        <form action="/delete/{{ $todo->id }}" method="POST">
+                                            @csrf
+                                            <button type="submit" class="btn btn--delete"
+                                                data-action="/delete/{{ $todo->id }}">削除</button>
+                                        </form>
                                     </td>
                                 </tr>
                             @endforeach
                         </tbody>
                     </table>
-                </form>
+                </div>
             </div>
         </div>
-    </div>
-@endsection
+    @endsection

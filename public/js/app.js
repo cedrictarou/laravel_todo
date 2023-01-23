@@ -2064,10 +2064,6 @@ module.exports = {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _bootstrap__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 /* harmony import */ var _bootstrap__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_bootstrap__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _form__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./form */ "./resources/js/form.js");
-/* harmony import */ var _form__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_form__WEBPACK_IMPORTED_MODULE_1__);
-// require("./bootstrap");
-
 
 
 /***/ }),
@@ -2105,36 +2101,6 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     forceTLS: true
 // });
-
-/***/ }),
-
-/***/ "./resources/js/form.js":
-/*!******************************!*\
-  !*** ./resources/js/form.js ***!
-  \******************************/
-/***/ (() => {
-
-// formのactionを切り替えるための処理
-
-var btns = document.querySelectorAll(".btn");
-btns.forEach(function (btn) {
-  btn.addEventListener("click", function () {
-    // e.preventDefault();
-    // formタグの取得
-    var form = btn.closest("form");
-    if (btn.classList.contains("btn--update")) {
-      var btnAttr = btn.dataset.action;
-      form.setAttribute("action", btnAttr);
-      console.log(form);
-    } else if (btn.classList.contains("btn--delete")) {
-      var _btnAttr = btn.dataset.action;
-      form.setAttribute("action", _btnAttr);
-      console.log(form);
-    } else {
-      return;
-    }
-  });
-});
 
 /***/ }),
 

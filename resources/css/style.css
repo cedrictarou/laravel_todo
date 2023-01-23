@@ -1,3 +1,7 @@
+:root {
+    --base-color: #808080;
+}
+
 *,
 *:before,
 *:after {
@@ -6,11 +10,13 @@
 
 html {
     font-size: 62.5%;
+    color: var(--base-color);
 }
 
 body {
     font-size: 1.6rem;
     background-color: #2d197c;
+    color: var(--base-color);
 }
 
 
@@ -19,6 +25,7 @@ body {
     display: block;
     background-color: transparent;
     border: solid .1rem #2D197C;
+    color: var(--base-color);
     border-radius: 1.5rem;
     padding: .8rem 1.2rem;
     font-size: 1.2rem;
@@ -45,7 +52,7 @@ body {
 
 .container {
     margin: 0 auto;
-    max-width: 800px;
+    max-width: 700px;
     min-width: 500px;
     margin-top: 10rem;
     padding: 0 2rem;
@@ -72,11 +79,10 @@ body {
     display: flex;
     width: 100%;
     justify-content: space-between;
-    gap: 1rem;
 }
 
 .todo-add__field {
-    width: 90%;
+    width: 85%;
 }
 
 .btn--add {
@@ -119,13 +125,13 @@ body {
 }
 
 .btn--update {
-    color: #dce7ed;
+    color: #fff;
     background-color: #d2562b;
     border: 0.1rem solid #d2562b;
 }
 
 .btn--delete {
-    color: #dce7ed;
+    color: #fff;
     background-color: #a1a9ca;
     border: 0.1rem solid #a1a9ca;
 }
