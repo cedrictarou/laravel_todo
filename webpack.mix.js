@@ -11,19 +11,20 @@ const mix = require("laravel-mix");
  |
  */
 
-mix.js("resources/js/app.js", "public/js")
-    .postCss("resources/css/app.css", "public/css")
-    .browserSync({
-        proxy: {
-            target: "http://127.0.0.1:8000",
-        },
-        files: [
-            "resources/**/*",
-            "config/**/*",
-            "routes/**/*",
-            "app/**/*",
-            "public/**/*",
-        ],
-        open: false,
-        reloadOnRestart: true,
-    });
+mix
+	.js("resources/js/app.js", "public/js")
+	.postCss("resources/css/app.css", "public/css", [require("tailwindcss")])
+	.browserSync({
+		proxy: {
+			target: "http://127.0.0.1:8000",
+		},
+		files: [
+			"resources/**/*",
+			"config/**/*",
+			"routes/**/*",
+			"app/**/*",
+			"public/**/*",
+		],
+		open: false,
+		reloadOnRestart: true,
+	});
