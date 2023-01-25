@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\TodoController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,12 +14,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// topページ
+Route::get('/', [TodoController::class, 'index'])->name('index');
+// add todo
+Route::post('/', [TodoController::class, 'store'])->name('store');
+// update todo
+Route::post('/update/{id}', [TodoController::class, 'update'])->name('update');
+// delete todo
+Route::post('/delete/{id}', [TodoController::class, 'delete'])->name('delete');
+
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+	return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
