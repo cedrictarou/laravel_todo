@@ -15,7 +15,8 @@
                     <input type="text" class="px-2 py-2 border rounded sm:w-10/12 w-2/3" name="content"
                         placeholder="タスクを入力してください。">
                     <button
-                        class="inline-flex items-center px-3 py-1.5 bg-indigo-500 hover:bg-indigo-600 text-white text-sm font-medium rounded-md mx-2"
+                        class="inline-flex items-center px-3 py-1.5 bg-indigo-500 hover:bg-indigo-600 transition duration-500 ease-in-out
+												text-white text-sm font-medium rounded-md mx-2"
                         type="submit">追加</button>
                 </form>
             </div>
@@ -42,13 +43,18 @@
                                     </td>
                                     <td class="py-3 text-center">
                                         <button form="form_{{ $todo->id }}" type="submit"
-                                            class="inline-flex items-center px-3 py-1.5 bg-indigo-500 hover:bg-indigo-600 text-white text-sm font-medium rounded-md mx-1">更新</button>
+                                            class="inline-flex items-center px-3 py-1.5 bg-sky-500
+																						hover:bg-sky-600
+																						transition duration-500 ease-in-out
+																						text-white text-sm font-medium rounded-md mx-1">更新</button>
                                     </td>
                                     <td class="py-3 text-center">
                                         <form action="/delete/{{ $todo->id }}" method="POST">
                                             @csrf
                                             <button type="submit"
-                                                class="inline-flex items-center px-3 py-1.5 bg-indigo-500 hover:bg-indigo-600 text-white text-sm font-medium rounded-md mx-1">削除</button>
+                                                class="inline-flex items-center px-3 py-1.5 bg-pink-500 hover:bg-pink-600
+																								transition duration-500 ease-in-out
+																								 text-white text-sm font-medium rounded-md mx-1">削除</button>
                                         </form>
                                     </td>
                                 </tr>
