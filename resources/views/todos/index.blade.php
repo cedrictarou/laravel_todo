@@ -9,8 +9,26 @@
         @enderror
         <div class="bg-white mt-20 rounded-lg p-5 max-w-3xl min-w-min container mx-auto">
             <div class="container mx-auto px-10">
-                <h1 class="text-4xl p-4">Todo List</h1>
-                <form action="{{ route('store') }}" method="POST" class="flex gap-2 justify-around">
+                <div class="flex justify-between items-center">
+                    <h1 class="text-4xl p-4">Todo List</h1>
+
+                    {{-- ログイン中かの表示 --}}
+                    @if (Auth::check())
+                        <div class="flex items-center">
+                            <span>「{{ $user->name }}」でログイン中</span>
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <button
+                                    class="inline-flex
+																		ml-3 items-center px-3 py-1.5 bg-rose-500 hover:bg-rose-600 transition duration-500 ease-in-out
+											text-white text-sm font-medium rounded-md mx-2"
+                                    type="submit">ログアウト</button>
+                            </form>
+                        </div>
+                    @endif
+                </div>
+
+                <form action="{{ route('todos.store') }}" method="POST" class="flex gap-2 justify-around">
                     @csrf
                     <input type="text" class="px-2 py-2 border rounded sm:w-10/12 w-2/3" name="content"
                         placeholder="タスクを入力してください。">
@@ -33,28 +51,26 @@
                             @foreach ($todos as $todo)
                                 <tr>
                                     <td class="py-3 w-1/6">{{ $todo->updated_at }}</td>
-                                    <td class="py-3 w-3/6">
-                                        <form action="/update/{{ $todo->id }}" method="POST"
-                                            id="form_{{ $todo->id }}">
+                                    <form action="{{ route('todos.update', ['id' => $todo->id]) }}" method="POST">
+                                        <td class="py-3 w-3/6">
                                             @csrf
                                             <input class="w-full border rounded px-2 py-2 focus:text-gray-800"
                                                 type="text" name="content" value="{{ $todo->content }}">
-                                        </form>
-                                    </td>
+                                        </td>
+                                        <td class="py-3 text-center">
+                                            <button type="submit"
+                                                class="inline-flex items-center px-3 py-1.5 bg-sky-500
+																								hover:bg-sky-600
+																								transition duration-500 ease-in-out
+																								text-white text-sm font-medium rounded-md mx-1">更新</button>
+                                        </td>
+                                    </form>
                                     <td class="py-3 text-center">
-                                        <button form="form_{{ $todo->id }}" type="submit"
-                                            class="inline-flex items-center px-3 py-1.5 bg-sky-500
-																						hover:bg-sky-600
-																						transition duration-500 ease-in-out
-																						text-white text-sm font-medium rounded-md mx-1">更新</button>
-                                    </td>
-                                    <td class="py-3 text-center">
-                                        <form action="/delete/{{ $todo->id }}" method="POST">
+                                        <form action="{{ route('todos.delete', ['id' => $todo->id]) }}" method="POST">
                                             @csrf
                                             <button type="submit"
                                                 class="inline-flex items-center px-3 py-1.5 bg-pink-500 hover:bg-pink-600
-																								transition duration-500 ease-in-out
-																								 text-white text-sm font-medium rounded-md mx-1">削除</button>
+																								transition duration-500 ease-in-out text-white text-sm font-medium rounded-md mx-1">削除</button>
                                         </form>
                                     </td>
                                 </tr>

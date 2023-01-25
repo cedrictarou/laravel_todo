@@ -4,14 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\TodoRequest;
 use App\Models\Todo;
-
+use Illuminate\Support\Facades\Auth;
 
 class TodoController extends Controller
 {
 	public function index()
 	{
+		//ユーザー認証
+		$user = Auth::user();
+		// dd($user);
+
 		$todos = Todo::all();
-		return view('index', compact('todos'));
+		return view('todos.index', compact('todos', 'user'));
 	}
 
 	public function store(TodoRequest $request)
@@ -19,7 +23,7 @@ class TodoController extends Controller
 		$content = $request->input('content');
 		$todo = new Todo;
 		$todo->fill(['content' => $content])->save();
-		return redirect('/');
+		return redirect('/todos');
 	}
 
 	public function update(TodoRequest $request, $id)
@@ -28,12 +32,12 @@ class TodoController extends Controller
 		$content = $request->input('content');
 		$todo = Todo::find($id);
 		$todo->fill(['content' => $content])->save();
-		return redirect('/');
+		return redirect('/todos');
 	}
 
 	public function delete($id)
 	{
 		Todo::find($id)->delete();
-		return redirect('/');
+		return redirect('/todos');
 	}
 }

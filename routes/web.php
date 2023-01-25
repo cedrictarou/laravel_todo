@@ -15,17 +15,20 @@ use Illuminate\Support\Facades\Route;
 */
 
 // topページ
-Route::get('/', [TodoController::class, 'index'])->name('index');
-// add todo
-Route::post('/', [TodoController::class, 'store'])->name('store');
-// update todo
-Route::post('/update/{id}', [TodoController::class, 'update'])->name('update');
-// delete todo
-Route::post('/delete/{id}', [TodoController::class, 'delete'])->name('delete');
+Route::get('/', function () {
+	return view('auth.register');
+});
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::prefix('todos')
+	->middleware(['auth'])
+	->controller(TodoController::class)
+	->name('todos.')
+	->group(function () {
+		Route::get('/', 'index')->name('index');
+		Route::post('/', 'store')->name('store');
+		Route::post('/update/{id}', 'update')->name('update');
+		Route::post('/delete/{id}', 'delete')->name('delete');
+	});
 
 Route::get('/dashboard', function () {
 	return view('dashboard');
