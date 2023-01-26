@@ -27,11 +27,25 @@
                         </div>
                     @endif
                 </div>
+                <div class="my-3">
+                    <a href="#"
+                        class="px-3 py-1.5 bg-indigo-500 hover:bg-indigo-600 transition duration-500 ease-in-out text-white text-sm font-medium rounded-md mx-2">
+                        タスク検索
+                    </a>
+                </div>
 
                 <form action="{{ route('todos.store') }}" method="POST" class="flex gap-2 justify-around">
                     @csrf
                     <input type="text" class="px-2 py-2 border rounded sm:w-10/12 w-2/3" name="content"
                         placeholder="タスクを入力してください。">
+
+                    <select name="tag_id" class="rounded focus:text-gray-800  text-gray-500">
+                        @foreach ($tags as $tag)
+                            <option value="{{ $tag->id }}">
+                                {{ $tag->name }}
+                            </option>
+                        @endforeach
+                    </select>
                     <button
                         class="inline-flex items-center px-3 py-1.5 bg-indigo-500 hover:bg-indigo-600 transition duration-500 ease-in-out
 												text-white text-sm font-medium rounded-md mx-2"
@@ -44,6 +58,7 @@
                         <thead>
                             <th class="py-3 text-center">作成日</th>
                             <th class="py-3 text-center">タスク名</th>
+                            <th class="py-3 text-center">タグ</th>
                             <th class="py-3 text-center">更新</th>
                             <th class="py-3 text-center">削除</th>
                         </thead>
@@ -58,6 +73,16 @@
                                                 type="text" name="content" value="{{ $todo->content }}">
                                         </td>
                                         <td class="py-3 text-center">
+                                            <select name="tag_id" class="rounded focus:text-gray-800"">
+                                                @foreach ($tags as $tag)
+                                                    <option value={{ $todo->getTagId() }}
+                                                        @if ($tag->id == $todo->getTagId()) selected @endif>
+                                                        {{ $tag->name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </td>
+                                        <td class="py-3 text-center">
                                             <button type="submit"
                                                 class="inline-flex items-center px-3 py-1.5 bg-sky-500
 																								hover:bg-sky-600
@@ -65,6 +90,7 @@
 																								text-white text-sm font-medium rounded-md mx-1">更新</button>
                                         </td>
                                     </form>
+
                                     <td class="py-3 text-center">
                                         <form action="{{ route('todos.delete', ['id' => $todo->id]) }}" method="POST">
                                             @csrf
