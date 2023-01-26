@@ -17,6 +17,6 @@ class Tag extends Model
 
 	public function todo()
 	{
-		return $this->hasOne('App\Models\Todo');
+		return $this->hasMany('App\Models\Todo');
 	}
 }

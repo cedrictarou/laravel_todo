@@ -25,18 +25,19 @@ class TodoRequest extends FormRequest
 	{
 		return [
 			'content' => 'required |max:20',
+			'tag_id' => 'required',
 		];
 	}
 	public function messages()
 	{
 		return [
 			'content.required' => '内容を入力してください',
-			'content.max' => '20文字以内で入力してください',
+			'tag.required' => 'タグを選択してください',
 		];
 	}
 
 	protected function getRedirectUrl()
 	{
-		return '/';
+		return '/todos';
 	}
 }

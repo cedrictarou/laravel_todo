@@ -28,6 +28,7 @@ Route::prefix('todos')
 		Route::post('/', 'store')->name('store');
 		Route::post('/update/{id}', 'update')->name('update');
 		Route::post('/delete/{id}', 'delete')->name('delete');
+		Route::get('/search', 'search')->name('search');
 	});
 
 Route::get('/dashboard', function () {

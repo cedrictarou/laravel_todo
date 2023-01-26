@@ -6,6 +6,8 @@ use App\Http\Requests\TodoRequest;
 use App\Models\Tag;
 use App\Models\Todo;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
+
 
 class TodoController extends Controller
 {
@@ -25,7 +27,7 @@ class TodoController extends Controller
 			'content' => $params['content'],
 			'tag_id' => (int)$params['tag_id'],
 		]);
-		return redirect('/todos');
+		return redirect()->route('todos.index');
 	}
 
 	public function update(TodoRequest $request, $id)
@@ -33,16 +35,31 @@ class TodoController extends Controller
 		$todo = Todo::find($id);
 		$params = $request->all();
 		unset($params['_token']);
-		$todo->create([
+		$todo->update([
 			'content' => $params['content'],
 			'tag_id' => (int)$params['tag_id'],
 		]);
-		return redirect('/todos');
+		return back();
 	}
 
 	public function delete($id)
 	{
 		Todo::find($id)->delete();
-		return redirect('/todos');
+		return back();
+	}
+
+	public function search(Request $request)
+	{
+		$user = Auth::user();
+		$tags = Tag::all();
+		// 検索処理
+		$params = $request->all();
+		if (!empty($params)) {
+			$query = Todo::search($params);
+			$todos = $query->get();
+		} else {
+			$todos = [];
+		}
+		return view('todos.search', compact('user', 'tags', 'todos'));
 	}
 }

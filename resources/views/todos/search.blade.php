@@ -10,7 +10,7 @@
         <div class="bg-white mt-20 rounded-lg p-5 max-w-3xl min-w-min container mx-auto">
             <div class="container mx-auto px-10">
                 <div class="flex justify-between items-center">
-                    <h1 class="text-4xl p-4">Todo List</h1>
+                    <h1 class="text-4xl p-4">タスク検索</h1>
 
                     {{-- ログイン中かの表示 --}}
                     @if (Auth::check())
@@ -28,16 +28,16 @@
                     @endif
                 </div>
                 <div class="my-3">
-                    <a href="/todos/search"
+                    <a href="/todos"
                         class="px-3 py-1.5 bg-indigo-500 hover:bg-indigo-600 transition duration-500 ease-in-out text-white text-sm font-medium rounded-md mx-2">
-                        タスク検索
+                        戻る
                     </a>
                 </div>
 
-                <form action="{{ route('todos.store') }}" method="POST" class="flex gap-2 justify-around">
+                <form action="{{ route('todos.search') }}" method="GET" class="flex gap-2 justify-around">
                     @csrf
                     <input type="text" class="px-2 py-2 border rounded sm:w-10/12 w-2/3" name="content"
-                        placeholder="タスクを入力してください。">
+                        placeholder="検索するタスクを入力してください。">
 
                     <select name="tag_id" class="rounded focus:text-gray-800  text-gray-500">
                         <option value selected></option>
@@ -50,7 +50,7 @@
                     <button
                         class="inline-flex items-center px-3 py-1.5 bg-indigo-500 hover:bg-indigo-600 transition duration-500 ease-in-out
 												text-white text-sm font-medium rounded-md mx-2"
-                        type="submit">追加</button>
+                        type="submit">検索</button>
                 </form>
             </div>
             <div class="container mx-auto">
@@ -64,44 +64,46 @@
                             <th class="py-3 text-center">削除</th>
                         </thead>
                         <tbody>
-                            @foreach ($todos as $todo)
-                                <tr>
-                                    <td class="py-3 w-1/6">{{ $todo->updated_at }}</td>
-                                    <form action="{{ route('todos.update', ['id' => $todo->id]) }}" method="POST">
-                                        <td class="py-3 w-3/6">
-                                            @csrf
-                                            <input class="w-full border rounded px-2 py-2 focus:text-gray-800"
-                                                type="text" name="content" value="{{ $todo->content }}">
-                                        </td>
-                                        <td class="py-3 text-center">
-                                            <select name="tag_id" class="rounded focus:text-gray-800"">
-                                                @foreach ($tags as $tag)
-                                                    <option value={{ $tag->id }}
-                                                        @if ($tag->id == $todo->getTagId()) selected @endif>
-                                                        {{ $tag->name }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
-                                        </td>
-                                        <td class="py-3 text-center">
-                                            <button type="submit"
-                                                class="inline-flex items-center px-3 py-1.5 bg-sky-500
+                            @if (!empty($todos))
+                                @foreach ($todos as $todo)
+                                    <tr>
+                                        <td class="py-3 w-1/6">{{ $todo->updated_at }}</td>
+                                        <form action="{{ route('todos.update', ['id' => $todo->id]) }}" method="POST">
+                                            <td class="py-3 w-3/6">
+                                                @csrf
+                                                <input class="w-full border rounded px-2 py-2 focus:text-gray-800"
+                                                    type="text" name="content" value="{{ $todo->content }}">
+                                            </td>
+                                            <td class="py-3 text-center">
+                                                <select name="tag_id" class="rounded focus:text-gray-800"">
+                                                    @foreach ($tags as $tag)
+                                                        <option value={{ $tag->id }}
+                                                            @if ($tag->id == $todo->getTagId()) selected @endif>
+                                                            {{ $tag->name }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                            </td>
+                                            <td class="py-3 text-center">
+                                                <button type="submit"
+                                                    class="inline-flex items-center px-3 py-1.5 bg-sky-500
 																								hover:bg-sky-600
 																								transition duration-500 ease-in-out
 																								text-white text-sm font-medium rounded-md mx-1">更新</button>
-                                        </td>
-                                    </form>
-
-                                    <td class="py-3 text-center">
-                                        <form action="{{ route('todos.delete', ['id' => $todo->id]) }}" method="POST">
-                                            @csrf
-                                            <button type="submit"
-                                                class="inline-flex items-center px-3 py-1.5 bg-pink-500 hover:bg-pink-600
-																								transition duration-500 ease-in-out text-white text-sm font-medium rounded-md mx-1">削除</button>
+                                            </td>
                                         </form>
-                                    </td>
-                                </tr>
-                            @endforeach
+
+                                        <td class="py-3 text-center">
+                                            <form action="{{ route('todos.delete', ['id' => $todo->id]) }}" method="POST">
+                                                @csrf
+                                                <button type="submit"
+                                                    class="inline-flex items-center px-3 py-1.5 bg-pink-500 hover:bg-pink-600
+																								transition duration-500 ease-in-out text-white text-sm font-medium rounded-md mx-1">削除</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            @endif
                         </tbody>
                     </table>
                 </div>
