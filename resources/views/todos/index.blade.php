@@ -64,7 +64,7 @@
                             <th class="py-3 text-center">削除</th>
                         </thead>
                         <tbody>
-                            @foreach ($todos as $todo)
+                            @foreach ($user->todo as $todo)
                                 <tr>
                                     <td class="py-3 w-1/6">{{ $todo->updated_at }}</td>
                                     <form action="{{ route('todos.update', ['id' => $todo->id]) }}" method="POST">

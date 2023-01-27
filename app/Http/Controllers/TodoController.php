@@ -15,17 +15,19 @@ class TodoController extends Controller
 	{
 		$user = Auth::user();
 		$tags = Tag::all();
-		$todos = Todo::all();
-		return view('todos.index', compact('todos', 'user', 'tags'));
+
+		return view('todos.index', compact('user', 'tags'));
 	}
 
 	public function store(TodoRequest $request)
 	{
 		$params = $request->all();
 		unset($params['_token']);
+		$user = Auth::user();
 		Todo::create([
 			'content' => $params['content'],
 			'tag_id' => (int)$params['tag_id'],
+			'user_id' => (int)$user['id'],
 		]);
 		return redirect()->route('todos.index');
 	}
@@ -54,11 +56,14 @@ class TodoController extends Controller
 		$tags = Tag::all();
 		// 検索処理
 		$params = $request->all();
-		if (!empty($params)) {
-			$query = Todo::search($params);
-			$todos = $query->get();
-		} else {
+		if (empty($params)) {
+			// 最初はtodoを表示させない
 			$todos = [];
+		} else {
+			// 検索条件がるときに検索処理をする
+			// ユーザーidも検索に追加する
+			$params['user_id'] = (int)$user->id;
+			$todos = Todo::search($params)->get();
 		}
 		return view('todos.search', compact('user', 'tags', 'todos'));
 	}
