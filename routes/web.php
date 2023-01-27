@@ -29,10 +29,8 @@ Route::prefix('todos')
 		Route::post('/update/{id}', 'update')->name('update');
 		Route::post('/delete/{id}', 'delete')->name('delete');
 		Route::get('/search', 'search')->name('search');
+		Route::get('/find', 'find')->name('find');
 	});
 
-Route::get('/dashboard', function () {
-	return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
 
 require __DIR__ . '/auth.php';

@@ -50,21 +50,23 @@ class TodoController extends Controller
 		return back();
 	}
 
-	public function search(Request $request)
+	public function search()
+	{
+		$user = Auth::user();
+		$tags = Tag::all();
+
+		return view('todos.search', compact('user', 'tags'));
+	}
+
+	public function find(Request $request)
 	{
 		$user = Auth::user();
 		$tags = Tag::all();
 		// 検索処理
 		$params = $request->all();
-		if (empty($params)) {
-			// 最初はtodoを表示させない
-			$todos = [];
-		} else {
-			// 検索条件がるときに検索処理をする
-			// ユーザーidも検索に追加する
-			$params['user_id'] = (int)$user->id;
-			$todos = Todo::search($params)->get();
-		}
+		$params['user_id'] = (int)$user->id;
+		$todos = Todo::search($params)->get();
+
 		return view('todos.search', compact('user', 'tags', 'todos'));
 	}
 }
